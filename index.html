@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HAPPY VALENTINES DAY NANA (RAVI KUMAR) ❤️</title>
+
 <style>
 
 body{
     margin:0;
-    font-family: "Times New Roman", Times, serif;   /* Simple Plain Font */
+    font-family: "Times New Roman", Times, serif;
     background:linear-gradient(135deg,#ff9a9e,#fecfef);
     overflow-x:hidden;
     text-align:center;
@@ -25,14 +26,11 @@ body{
 }
 
 .hero h1{
-    font-family: "Times New Roman", Times, serif;  /* Removed cursive */
     font-size:45px;
     margin:0;
     font-weight:bold;
 }
 
-</style>
-    
 .hero p{
     font-size:20px;
 }
@@ -143,10 +141,10 @@ footer{
 
 <body>
 
-<audio autoplay loop>
+<!-- Background Music -->
+<audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_romantic_piano.mp3" type="audio/mpeg">
 </audio>
-
 
 <!-- HERO SECTION -->
 <div class="section hero">
@@ -182,7 +180,7 @@ footer{
     </div>
 
     <div class="card hidden" id="proposalResult">
-        <div class="ring">💍</div>
+        <div class="ring" id="ring">💍</div>
         <h2>I Knew It 😍</h2>
         <p>You are my forever and always 💕</p>
     </div>
@@ -203,6 +201,11 @@ with lots of 💕 bgrmm 😘 😘 😘 😘 😘
 </footer>
 
 <script>
+
+/* Play Music on First Click */
+document.body.addEventListener("click", function(){
+    document.getElementById("bgMusic").play();
+}, { once: true });
 
 /* Smooth Scroll */
 function scrollToQuiz(){
@@ -227,12 +230,8 @@ let quoteIndex = 0;
 const quoteBox = document.getElementById("quoteBox");
 
 function changeQuote(){
-    quoteBox.style.opacity = 0;
-    setTimeout(()=>{
-        quoteBox.textContent = quotes[quoteIndex];
-        quoteBox.style.opacity = 1;
-        quoteIndex = (quoteIndex + 1) % quotes.length;
-    },500);
+    quoteBox.textContent = quotes[quoteIndex];
+    quoteIndex = (quoteIndex + 1) % quotes.length;
 }
 
 changeQuote();
@@ -284,6 +283,7 @@ noBtn.addEventListener("mouseover",()=>{
 function sayYes(){
     document.getElementById("proposalCard").classList.add("hidden");
     document.getElementById("proposalResult").classList.remove("hidden");
+    document.getElementById("ring").style.display="block";
     startHearts();
 }
 
@@ -310,11 +310,6 @@ function startHearts(){
         setTimeout(()=>{heart.remove();},5000);
     },300);
 }
-
-/* Music autoplay fix */
-document.body.addEventListener("click",()=>{
-    document.getElementById("bgMusic").play();
-});
 
 </script>
 
