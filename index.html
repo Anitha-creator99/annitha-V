@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HAPPY VALENTINES DAY MY NANA (RAVI KUMAR) ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -28,9 +28,11 @@ body{
 }
 
 .hero h1{
-    font-family:'Great Vibes',cursive;
-    font-size:55px;
+    font-family:'Dancing Script', cursive;
+    font-size:65px;
     margin:0;
+    letter-spacing:2px;
+    text-shadow: 2px 2px 10px rgba(255,255,255,0.6);
 }
 
 .hero p{
@@ -177,4 +179,145 @@ footer{
     <div class="card" id="proposalCard">
         <h2>Will You Be Mine Forever? 💖</h2>
         <button class="btn" onclick="sayYes()">Yes ❤️</button>
-        <button class="btn" id="noBtn">No 😆</
+        <button class="btn" id="noBtn">No 😆</button>
+    </div>
+
+    <div class="card hidden" id="proposalResult">
+        <div class="ring">💍</div>
+        <h2>I Knew It 😍</h2>
+        <p>You are my forever and always 💕</p>
+    </div>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="slideshow">
+    <img src="IMG_20251223_113731.jpg" class="active">
+    <img src="20211127_174840-COLLAGE.jpg">
+    <img src="Screenshot_2025-09-16-17-03-09-517_com.miui.gallery.jpg">
+    <img src="IMG_20250819_171434.jpg">
+    <img src="20250807_123631.jpg">
+    <img src="IMG_20250213_204044.jpg">
+</div>
+
+<footer>
+Made with ❤️ for Ravikumar
+</footer>
+
+<script>
+
+/* Smooth Scroll */
+function scrollToQuiz(){
+    document.getElementById("quizSection").scrollIntoView({behavior:"smooth"});
+}
+
+function scrollToProposal(){
+    document.getElementById("proposalSection").scrollIntoView({behavior:"smooth"});
+}
+
+/* Romantic Quotes */
+const quotes = [
+    "You are not just my love, you are my peace ❤️",
+    "Every heartbeat of mine whispers your name 💕",
+    "With you, forever doesn’t feel long enough 💍",
+    "You are my today, my tomorrow, and my always 🥰",
+    "Loving you is the best decision of my life 💖",
+    "My world is more beautiful because you are in it 🌸"
+];
+
+let quoteIndex = 0;
+const quoteBox = document.getElementById("quoteBox");
+
+function changeQuote(){
+    quoteBox.style.opacity = 0;
+    setTimeout(()=>{
+        quoteBox.textContent = quotes[quoteIndex];
+        quoteBox.style.opacity = 1;
+        quoteIndex = (quoteIndex + 1) % quotes.length;
+    },500);
+}
+
+changeQuote();
+setInterval(changeQuote,4000);
+
+/* QUIZ */
+const quizData=[
+    {question:"Who loves more?", options:["You 😘","Me 🥺","Both 💕"]},
+    {question:"Will you stay forever?", options:["Yes ❤️","Always 💍","Forever 💕"]}
+];
+
+let currentQuestion=0;
+const questionEl=document.getElementById("question");
+const optionsEl=document.getElementById("options");
+
+function loadQuestion(){
+    questionEl.textContent=quizData[currentQuestion].question;
+    optionsEl.innerHTML="";
+    quizData[currentQuestion].options.forEach(option=>{
+        const btn=document.createElement("button");
+        btn.classList.add("option");
+        btn.textContent=option;
+        btn.onclick=nextQuestion;
+        optionsEl.appendChild(btn);
+    });
+}
+
+function nextQuestion(){
+    currentQuestion++;
+    if(currentQuestion<quizData.length){
+        loadQuestion();
+    }else{
+        document.getElementById("quizCard").classList.add("hidden");
+        document.getElementById("quizResult").classList.remove("hidden");
+    }
+}
+
+loadQuestion();
+
+/* Proposal */
+const noBtn=document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover",()=>{
+    noBtn.style.position="absolute";
+    noBtn.style.left=Math.random()*window.innerWidth+"px";
+    noBtn.style.top=Math.random()*window.innerHeight+"px";
+});
+
+function sayYes(){
+    document.getElementById("proposalCard").classList.add("hidden");
+    document.getElementById("proposalResult").classList.remove("hidden");
+    startHearts();
+}
+
+/* Slideshow */
+let slides=document.querySelectorAll(".slideshow img");
+let index=0;
+
+setInterval(()=>{
+    slides[index].classList.remove("active");
+    index=(index+1)%slides.length;
+    slides[index].classList.add("active");
+},3000);
+
+/* Falling Hearts */
+function startHearts(){
+    setInterval(()=>{
+        const heart=document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML="💖";
+        heart.style.left=Math.random()*window.innerWidth+"px";
+        heart.style.fontSize=(Math.random()*20+15)+"px";
+        heart.style.animationDuration=(Math.random()*3+2)+"s";
+        document.body.appendChild(heart);
+        setTimeout(()=>{heart.remove();},5000);
+    },300);
+}
+
+/* Music autoplay fix */
+document.body.addEventListener("click",()=>{
+    document.getElementById("bgMusic").play();
+});
+
+</script>
+
+</body>
+</html>
