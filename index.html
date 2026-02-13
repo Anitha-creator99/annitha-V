@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annitha ❤️ Ravikumar</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#ff9a9e,#fecfef);
+    overflow-x:hidden;
+    text-align:center;
+    color:white;
+}
+
+/* Sections */
+.section{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+/* Hero */
+.hero h1{
+    font-family:'Great Vibes',cursive;
+    font-size:60px;
+    margin:0;
+}
+
+.hero p{
+    font-size:20px;
+}
+
+.countdown{
+    font-size:22px;
+    margin-top:15px;
+}
+
+.btn{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff4b6e;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.1);
+}
+
+/* Cards */
+.card{
+    background:rgba(255,255,255,0.2);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    width:350px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.option{
+    display:block;
+    margin:10px 0;
+    padding:10px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    background:white;
+    color:#ff4b6e;
+}
+
+/* Slideshow */
+.slideshow{
+    width:90%;
+    max-width:500px;
+    margin:40px auto;
+}
+
+.slideshow img{
+    width:100%;
+    border-radius:20px;
+    display:none;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.slideshow img.active{
+    display:block;
+    animation:fade 1s;
+}
+
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* Ring */
+.ring{
+    font-size:80px;
+    display:none;
+    animation:pop 1s infinite alternate;
+}
+
+@keyframes pop{
+    from{transform:scale(1);}
+    to{transform:scale(1.2);}
+}
+
+/* Hearts */
+.heart{
+    position:fixed;
+    top:-10px;
+    color:white;
+    animation:fall linear forwards;
+    z-index:1;
+}
+
+@keyframes fall{
+    to{transform:translateY(100vh);}
+}
+
+footer{
+    padding:20px;
+    background:rgba(0,0,0,0.2);
+}
+
+.hidden{
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HERO SECTION -->
+<div class="section hero">
+    <h1>Annitha ❤️ Ravikumar</h1>
+    <p>Our Love Story Forever 💕</p>
+    <div class="countdown" id="countdown"></div>
+    <button class="btn" onclick="scrollToQuiz()">Start Love Journey 💖</button>
+</div>
+
+<!-- QUIZ SECTION -->
+<div class="section" id="quizSection">
+    <div class="card" id="quizCard">
+        <h2>Love Quiz 😊</h2>
+        <div id="question"></div>
+        <div id="options"></div>
+    </div>
+
+    <div class="card hidden" id="quizResult">
+        <h2>❤️ I Love You So Much ❤️</h2>
+        <p>You are my favorite person forever 🥰</p>
+        <button class="btn" onclick="scrollToProposal()">Next 💍</button>
+    </div>
+</div>
+
+<!-- PROPOSAL SECTION -->
+<div class="section" id="proposalSection">
+    <div class="card" id="proposalCard">
+        <h2>Will You Be Mine Forever? 💖</h2>
+        <button class="btn" onclick="sayYes()">Yes ❤️</button>
+        <button class="btn" id="noBtn">No 😆</button>
+    </div>
+
+    <div class="card hidden" id="proposalResult">
+        <div class="ring">💍</div>
+        <h2>I Knew It 😍</h2>
+        <p>You are my forever and always 💕</p>
+    </div>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="slideshow">
+    <img src="IMG_20251223_113731.jpg" class="active">
+    <img src="20211127_174840-COLLAGE.jpg">
+    <img src="Screenshot_2025-09-16-17-03-09-517_com.miui.gallery.jpg">
+    <img src="IMG_20250819_171434.jpg">
+    <img src="20250807_123631.jpg">
+    <img src="IMG_20250213_204044.jpg">
+</div>
+
+<footer>
+Made with ❤️ for Annitha & Ravikumar
+</footer>
+
+<script>
+
+/* Smooth Scroll */
+function scrollToQuiz(){
+    document.getElementById("quizSection").scrollIntoView({behavior:"smooth"});
+}
+
+function scrollToProposal(){
+    document.getElementById("proposalSection").scrollIntoView({behavior:"smooth"});
+}
+
+/* Countdown */
+const weddingDate = new Date("Feb 14, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+    const days = Math.floor(distance/(1000*60*60*24));
+    const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+
+    document.getElementById("countdown").innerHTML =
+    "Countdown to Our Special Day 💖 " + days+"d "+hours+"h "+minutes+"m ";
+},1000);
+
+/* QUIZ */
+const quizData=[
+    {question:"Who loves more?", options:["You 😘","Me 🥺","Both 💕"]},
+    {question:"Will you stay forever?", options:["Yes ❤️","Always 💍","Forever 💕"]}
+];
+
+let currentQuestion=0;
+const questionEl=document.getElementById("question");
+const optionsEl=document.getElementById("options");
+
+function loadQuestion(){
+    questionEl.textContent=quizData[currentQuestion].question;
+    optionsEl.innerHTML="";
+    quizData[currentQuestion].options.forEach(option=>{
+        const btn=document.createElement("button");
+        btn.classList.add("option");
+        btn.textContent=option;
+        btn.onclick=nextQuestion;
+        optionsEl.appendChild(btn);
+    });
+}
+
+function nextQuestion(){
+    currentQuestion++;
+    if(currentQuestion<quizData.length){
+        loadQuestion();
+    }else{
+        document.getElementById("quizCard").classList.add("hidden");
+        document.getElementById("quizResult").classList.remove("hidden");
+    }
+}
+
+loadQuestion();
+
+/* Proposal */
+const noBtn=document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover",()=>{
+    noBtn.style.position="absolute";
+    noBtn.style.left=Math.random()*window.innerWidth+"px";
+    noBtn.style.top=Math.random()*window.innerHeight+"px";
+});
+
+function sayYes(){
+    document.getElementById("proposalCard").classList.add("hidden");
+    document.getElementById("proposalResult").classList.remove("hidden");
+    startHearts();
+}
+
+/* Slideshow */
+let slides=document.querySelectorAll(".slideshow img");
+let index=0;
+
+setInterval(()=>{
+    slides[index].classList.remove("active");
+    index=(index+1)%slides.length;
+    slides[index].classList.add("active");
+},3000);
+
+/* Falling Hearts */
+function startHearts(){
+    setInterval(()=>{
+        const heart=document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML="💖";
+        heart.style.left=Math.random()*window.innerWidth+"px";
+        heart.style.fontSize=(Math.random()*20+15)+"px";
+        heart.style.animationDuration=(Math.random()*3+2)+"s";
+        document.body.appendChild(heart);
+        setTimeout(()=>{heart.remove();},5000);
+    },300);
+}
+
+/* Music autoplay fix */
+document.body.addEventListener("click",()=>{
+    document.getElementById("bgMusic").play();
+});
+
+</script>
+
+</body>
+</html>
